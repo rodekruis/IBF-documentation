@@ -7,4 +7,4 @@
 
 ## IBF explained
 
-- [[Glossary]]
+- [Glossary](./glossary.md)
