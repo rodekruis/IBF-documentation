@@ -1,6 +1,6 @@
 ### Definition of IBF
 
-a system that displays and disseminates early warning notifications for an incoming hazard and visualizes relevant information to support decision making, following the country early action protocol.
+A system that forecasts Early Warning alerts, disseminates notifications, and visualizes exposure information to support decision making, following the country advisory.
 
 ### System components & definitions
 
