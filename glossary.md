@@ -20,15 +20,19 @@ NOTE: sometimes concepts refer to other concepts, which may be lower in the list
 * **Forecast**: Every pipeline run produces a forecast, which can be either one (or more) *alert(s)* or *no alert*.
 * **Alert**: A forecast can be composed of one or more alerts, relating each to a different spatial and/or temporal extent, in which the severity is expected to exceed the minimum severity threshold.
 * **Spatial extent**: Defines the spatial extent of an *alert* or *event*, whereby a country is split in hazard-type-relevant regions, such as catchment areas for *floods* and climate regions for *drought*.
-* **Temporal extent**: Defines the temporal extent of an *alert* or *event*. *Floods* has one potential temporal extent: *0 days to 7 days*, where the actual *temporal extent* would the subset of these *lead times* that are actually part of the alert. *Drought* can have multiple temporal extents, representing multiple rain seasons in a year.
+* **Temporal extent**: Defines the temporal extent of an *alert* or *event* or *severity entry*. All hazards have a start time and an end time, which define their temporal extent. *Floods* temporal extent usually spans days, and *drought* temporal extent spans months, typically matches the rainy seasons.
+  * **Start time**: Start of the temporal extent in timestamp format.
+  * **End time**: End of the temporal extent in timestamp format.
 * **Alert class**: An *alert* is classified as a *minimum, medium or high alert* based on *severity* and *probability*.
 * **Trigger**: An *alert* that has *alert class 'high'*, but additionally meets other *EAP* conditions, such as the high alert occurring before a specific lead-time such as 5 days. These conditions are hazard and country dependent. A *trigger* can be forecasted by the pipeline, or it can be "set" by a user based on a forecasted non-trigger alert.
 * **EAP**: Early Action Protocol, which defines exact trigger conditions on country and hazard level.
 * **Event**: Consecutive *alerts* on the same *spatial extent* and *temporal extents* are part of the same (long-living) *event*.
-  * **Lead time**: Amount of time between forecast and a relevant forecasted moment, such as the *start time* of an *event*.
-  * **Start time**: Event start time, as per the latest forecast on this *event*. When an event is *ongoing*, this stabilizes at the start time where it first became *ongoing*.
+  * **Temporal extent**: Defines the temporal extent of an *event*. All events have a start time and an end time, which define their temporal extent. *Floods* temporal extent usually spans days, and *drought* temporal extent spans months, typically matches the rainy seasons.
+    * **Start time**: Event start time, as per the latest forecast on this *event*. When an event is *ongoing*, this stabilizes at the start time where it first became *ongoing*. Indicates when the event is expected to start.
+    * **End time**: Event end time, as per the latest forecast on this *event*. Indicates when the event is expected to end.
   * **Ongoing**: An ongoing event has a lead time of 0 days (in *floods*) or 0 months (in *drought*). As opposed to an *upcoming* event.
   * **First issued time**: Time of forecast of the first *alert* of an *event*.
+  * **Lead time**: Amount of time between *forecast time* and *event start time*. Usually represented in the *n-unit* formats, like 1-day, 6-hour, 2-month.
   * **Time of reaching peak alert class**: The (lead) time when an *alert* first reaches its highest *alert class*. Different from *start time*, as that may be earlier on a lower class already. Different from simple 'peak (lead) time', because the absolute peak can be later than the first time it crosses the highest threshold. The latter being the relevant time for EAP conditions.
   * **Severity**: Measure of severity of an alert, such as *water discharge* for *floods*. This measure is compared to severity thresholds to classify into *severity class*.
   * **Probability**: Measure of probability of an alert. For e.g. *floods*, this is the percentage of (GloFAS) model runs that exceed a certain severity threshold. This gives additional information on top of the *severity* above, which is aggregate (median) severity across these model runs.
