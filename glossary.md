@@ -18,22 +18,25 @@ NOTE: sometimes concepts refer to other concepts, which may be lower in the list
 * **Hazard type**: IBF has separate pipelines per hazard type, such as *floods* and *drought*.
 * **Pipeline run**: Each pipeline runs automatically with a certain frequency, which is hazard-type-specific, e.g. daily for *floods* or monthly for *drought*.
 * **Forecast**: Every pipeline run produces a forecast, which can be either one (or more) *alert(s)* or *no alert*.
+* **Forecast time**: Time when a forecast was issued, so when the pipeline was run.
 * **Alert**: A forecast can be composed of one or more alerts, relating each to a different spatial and/or temporal extent, in which the severity is expected to exceed the minimum severity threshold.
 * **Spatial extent**: Defines the spatial extent of an *alert* or *event*, whereby a country is split in hazard-type-relevant regions, such as catchment areas for *floods* and climate regions for *drought*.
 * **Temporal extent**: Defines the temporal extent of an *alert* or *event*. *Floods* has one potential temporal extent: *0 days to 7 days*, where the actual *temporal extent* would the subset of these *lead times* that are actually part of the alert. *Drought* can have multiple temporal extents, representing multiple rain seasons in a year.
+* **Time interval**: Relevant time interval, on which the pipeline sends forecast data to the API. This *time interval* e.g. spans one day for *floods*, and spans a full season for *drought*.
+* **Ensemble run**: Most forecast models run many times (e.g. 50), instead of just giving one point estimate. This ensemble of runs allows for insight into *probability*.
 * **Alert class**: An *alert* is classified as a *minimum, medium or high alert* based on *severity* and *probability*.
 * **Trigger**: An *alert* that has *alert class 'high'*, but additionally meets other *EAP* conditions, such as the high alert occurring before a specific lead-time such as 5 days. These conditions are hazard and country dependent. A *trigger* can be forecasted by the pipeline, or it can be "set" by a user based on a forecasted non-trigger alert.
 * **EAP**: Early Action Protocol, which defines exact trigger conditions on country and hazard level.
 * **Event**: Consecutive *alerts* on the same *spatial extent* and *temporal extents* are part of the same (long-living) *event*.
-  * **Lead time**: Amount of time between forecast and a relevant forecasted moment, such as the *start time* of an *event*.
-  * **Start time**: Event start time, as per the latest forecast on this *event*. When an event is *ongoing*, this stabilizes at the start time where it first became *ongoing*.
-  * **Ongoing**: An ongoing event has a lead time of 0 days (in *floods*) or 0 months (in *drought*). As opposed to an *upcoming* event.
+  * **Start time**: Event start time, as per the latest forecast on this *event*. Indicates when the event is expected to start. When an event becomes *ongoing*, this stabilizes at the start time where it first became *ongoing*.
+  * **End time**: Event end time, as per the latest forecast on this *event*. Indicates when the event is expected to end.
+  * **Ongoing**: An event is ongoing (at the time of viewing) if the last available *start time* has passed already, as opposed to an *upcoming* event, if not. This means that if yesterday's *pipeline run* forecasted an *upcoming event* for today, but today's pipeline run fails for whatever reason, than the event does switch to *ongoing* if viewed today.
   * **First issued time**: Time of forecast of the first *alert* of an *event*.
   * **Time of reaching peak alert class**: The (lead) time when an *alert* first reaches its highest *alert class*. Different from *start time*, as that may be earlier on a lower class already. Different from simple 'peak (lead) time', because the absolute peak can be later than the first time it crosses the highest threshold. The latter being the relevant time for EAP conditions.
-  * **Severity**: Measure of severity of an alert, such as *water discharge* for *floods*. This measure is compared to severity thresholds to classify into *severity class*.
-  * **Probability**: Measure of probability of an alert. For e.g. *floods*, this is the percentage of (GloFAS) model runs that exceed a certain severity threshold. This gives additional information on top of the *severity* above, which is aggregate (median) severity across these model runs.
+  * **Severity**: Measure of severity of an alert, such as *water discharge* for *floods*. This measure is initially available per *time interval* and per *ensemble run*. It is aggregated and compared to severity thresholds to classify into *severity class* per *time interval* and overall *severity class*.
+  * **Probability**: Measure of probability of an alert. For e.g. *floods*, this is the percentage of (GloFAS) model *ensemble runs* that exceed the threshold relating to the identified severity class. This gives additional information on top of the *severity* above, which is aggregate (median) severity across these ensemble runs.
   * **Exposure**: Measure of exposure of a forecasted event, such as *exposed population* (per admin-area) or *exposed hospitals*. This is not calculated per (lead time), but on aggregate alert level.
-* **Set trigger**: A *trigger* that is manually set by a user based on a pipeline *non-trigger alert*. In contrast to a pipeline-induced trigger.
+* **Set trigger**: A *trigger* that is manually set by a user based on a pipeline *non-trigger alert*. In contrast to an automatically classified trigger.
 * **Notification**: An *alert* can or cannot lead to a notification, through *email* and/or *WhatsApp*.
 * **Advisory**: Advisory is the call action set per *alert class*. It can (when available) refer to an *EAP* or another contingency plan document
 * **Last upload time**: Last time the pipeline has successfully updated IBF API for a particular country and hazard-type.
