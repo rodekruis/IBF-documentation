@@ -27,7 +27,7 @@ NOTE: sometimes concepts refer to other concepts, which may be lower in the list
 * **EAP**: Early Action Protocol, which defines exact trigger conditions on country and hazard level.
 * **Event**: Consecutive *alerts* on the same *spatial extent* and *temporal extents* are part of the same (long-living) *event*.
   * **Lead time**: Amount of time between forecast and a relevant forecasted moment, such as the *start time* of an *event*.
-  * **Start time**: Event start time, as per the latest alert of this *event*. When an event becomes *ongoing*, this stabilizes at the start time where it first became *ongoing*. When an event switches from *ongoing* to *upcoming* again, the *start time* switches to the latest alert's *start time* again.
+  * **Start time**: Event start time, as per the latest alert of this *event*. When an event becomes *ongoing*, this stabilizes at the start time where it first became *ongoing*.
   * **Ongoing**: An event is ongoing (at the *forecast time**) if the *forecast time* is later than the *start time*. As opposed to an *upcoming* event, if not.
   * **First issued time**: Time of forecast of the first *alert* of an *event*.
   * **Time of reaching peak alert class**: The (lead) time when an *alert* first reaches its highest *alert class*. Different from *start time*, as that may be earlier on a lower class already. Different from simple 'peak (lead) time', because the absolute peak can be later than the first time it crosses the highest threshold. The latter being the relevant time for EAP conditions.
