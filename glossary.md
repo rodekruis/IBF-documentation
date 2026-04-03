@@ -28,7 +28,7 @@ NOTE: sometimes concepts refer to other concepts, which may be lower in the list
 * **Event**: Consecutive *alerts* on the same *spatial extent* and *temporal extents* are part of the same (long-living) *event*.
   * **Lead time**: Amount of time between forecast and a relevant forecasted moment, such as the *start time* of an *event*.
   * **Start time**: Event start time, as per the latest alert of this *event*. When an event becomes *ongoing*, this stabilizes at the start time where it first became *ongoing*.
-  * **Ongoing**: An event is ongoing (at the *forecast time**) if the *forecast time* is later than the *start time*. As opposed to an *upcoming* event, if not.
+  * **Ongoing**: An event is ongoing (at the time of viewing) if the last available *start time* has passed already, as opposed to an *upcoming* event, if not. This means that if yesterday's *pipeline run* forecasted an *upcoming event* for today, but today's pipeline run fails for whatever reason, than the event does switch to *ongoing* if viewed today.
   * **First issued time**: Time of forecast of the first *alert* of an *event*.
   * **Time of reaching peak alert class**: The (lead) time when an *alert* first reaches its highest *alert class*. Different from *start time*, as that may be earlier on a lower class already. Different from simple 'peak (lead) time', because the absolute peak can be later than the first time it crosses the highest threshold. The latter being the relevant time for EAP conditions.
   * **Severity**: Measure of severity of an alert, such as *water discharge* for *floods*. This measure is compared to severity thresholds to classify into *severity class*.
