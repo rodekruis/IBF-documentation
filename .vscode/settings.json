@@ -1,0 +1,11 @@
+{
+  "editor.codeActionsOnSave": {},
+  "editor.lightbulb.enabled": "off",
+  "spellright.documentTypes": [],
+  "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+  },
+  "github.copilot.editor.enableCodeActions": false
+}
